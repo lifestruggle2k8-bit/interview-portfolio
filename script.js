@@ -5,6 +5,33 @@ const introGate = document.getElementById("introGate");
 const enterButton = document.getElementById("enterButton");
 const introVideo = document.getElementById("introVideo");
 const introSeenKey = "portfolio_intro_seen";
+const introMobileQuery = window.matchMedia("(max-width: 720px)");
+let introVideoResolved = false;
+
+function pickIntroSource() {
+  if (!introVideo) {
+    return null;
+  }
+
+  return introMobileQuery.matches
+    ? introVideo.dataset.mobileSrc || introVideo.dataset.fallbackSrc
+    : introVideo.dataset.desktopSrc || introVideo.dataset.fallbackSrc;
+}
+
+function applyIntroSource() {
+  if (!introVideo) {
+    return;
+  }
+
+  const nextSrc = pickIntroSource();
+  if (!nextSrc || introVideo.getAttribute("src") === nextSrc) {
+    return;
+  }
+
+  introVideo.setAttribute("src", nextSrc);
+  introVideo.load();
+  introVideoResolved = nextSrc === introVideo.dataset.fallbackSrc;
+}
 
 function closeIntro() {
   body.classList.remove("intro-lock");
@@ -26,11 +53,24 @@ if (enterButton) {
 }
 
 if (introVideo) {
+  applyIntroSource();
+
   introVideo.addEventListener("ended", () => {
     enterButton?.focus();
   });
 
-  introVideo.addEventListener("error", closeIntro);
+  introVideo.addEventListener("error", () => {
+    if (introVideoResolved) {
+      closeIntro();
+      return;
+    }
+
+    introVideoResolved = true;
+    introVideo.setAttribute("src", introVideo.dataset.fallbackSrc || "");
+    introVideo.load();
+  });
+
+  introMobileQuery.addEventListener("change", applyIntroSource);
 }
 
 document.addEventListener("keydown", (event) => {
