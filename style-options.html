@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>網站風格選單</title>
+    <style>
+      :root {
+        --bg: #111111;
+        --panel: #1b1b1b;
+        --line: rgba(255, 255, 255, 0.1);
+        --text: #f4f1ea;
+        --muted: #b2aaa0;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Noto Sans TC", "Segoe UI", sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top left, rgba(255, 180, 120, 0.08), transparent 20%),
+          linear-gradient(180deg, #0c0c0c, #151515);
+      }
+
+      .page {
+        width: min(1200px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 40px 0 80px;
+      }
+
+      .intro {
+        margin-bottom: 28px;
+      }
+
+      .intro h1 {
+        margin: 0 0 10px;
+        font-size: clamp(2rem, 4vw, 3.6rem);
+      }
+
+      .intro p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+      }
+
+      .option {
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        overflow: hidden;
+        background: var(--panel);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
+      }
+
+      .meta {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 18px 20px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .meta h2 {
+        margin: 0 0 6px;
+        font-size: 1.2rem;
+      }
+
+      .meta p,
+      .meta span {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .badge {
+        white-space: nowrap;
+      }
+
+      .preview {
+        min-height: 420px;
+        padding: 24px;
+      }
+
+      .notes {
+        padding: 18px 20px 22px;
+        border-top: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      .notes strong {
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .notes ul {
+        margin: 0;
+        padding-left: 18px;
+        color: var(--muted);
+      }
+
+      .apple {
+        background: linear-gradient(180deg, #f8f8f6, #ecebe7);
+        color: #111111;
+      }
+
+      .apple .wire-nav {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 42px;
+        color: #666666;
+        font-size: 0.9rem;
+      }
+
+      .apple .wire-hero {
+        padding: 52px 20px 36px;
+        text-align: center;
+      }
+
+      .apple .wire-hero h3 {
+        margin: 0;
+        font-size: 2.5rem;
+        line-height: 1.05;
+      }
+
+      .apple .wire-hero p {
+        max-width: 28ch;
+        margin: 18px auto 0;
+        color: #777777;
+      }
+
+      .apple .wire-block {
+        height: 160px;
+        margin-top: 22px;
+        border-radius: 22px;
+        background: rgba(0, 0, 0, 0.05);
+      }
+
+      .tech {
+        color: #d9fff7;
+        background:
+          radial-gradient(circle at top right, rgba(0, 255, 200, 0.14), transparent 24%),
+          linear-gradient(180deg, #071011, #0e1618);
+        font-family: "Consolas", "Courier New", monospace;
+      }
+
+      .tech .wire-nav {
+        display: flex;
+        justify-content: space-between;
+        color: #69f7d1;
+        margin-bottom: 22px;
+      }
+
+      .tech .wire-screen {
+        border: 1px solid rgba(105, 247, 209, 0.28);
+        padding: 16px;
+        border-radius: 18px;
+        background: rgba(0, 0, 0, 0.28);
+      }
+
+      .tech .wire-screen h3 {
+        margin: 0 0 10px;
+        font-size: 2rem;
+      }
+
+      .tech .wire-lines {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 14px;
+        margin-top: 18px;
+      }
+
+      .tech .line-box,
+      .tech .pulse-box {
+        min-height: 130px;
+        border: 1px solid rgba(105, 247, 209, 0.22);
+        border-radius: 14px;
+        background: rgba(8, 30, 29, 0.62);
+      }
+
+      .warm {
+        color: #412d1f;
+        background:
+          radial-gradient(circle at top left, rgba(179, 136, 95, 0.18), transparent 24%),
+          linear-gradient(180deg, #f4eadc, #e8d8c3);
+      }
+
+      .warm .wire-nav {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 26px;
+        color: #8a6d57;
+      }
+
+      .warm .wire-hero {
+        padding: 22px;
+        border-radius: 24px;
+        background: rgba(255, 250, 243, 0.72);
+      }
+
+      .warm .wire-hero h3 {
+        margin: 0;
+        font-size: 2.2rem;
+      }
+
+      .warm .wire-cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+        margin-top: 18px;
+      }
+
+      .warm .card {
+        min-height: 120px;
+        border-radius: 18px;
+        background: rgba(122, 91, 63, 0.1);
+      }
+
+      .cardstyle {
+        color: #111111;
+        background: linear-gradient(180deg, #fefefe, #ececec);
+      }
+
+      .cardstyle .wire-card {
+        max-width: 360px;
+        margin: 18px auto 0;
+        padding: 28px;
+        border-radius: 26px;
+        background: white;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+      }
+
+      .cardstyle .wire-card h3 {
+        margin: 0;
+        font-size: 2rem;
+      }
+
+      .cardstyle .wire-card p {
+        color: #666666;
+      }
+
+      .cardstyle .mini-bar {
+        height: 12px;
+        margin-top: 12px;
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.08);
+      }
+
+      @media (max-width: 900px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        .warm .wire-cards,
+        .tech .wire-lines {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <section class="intro">
+        <h1>網站風格方向</h1>
+        <p>先選氣質，再做正式版。下面是 4 種方向的快速示意。</p>
+      </section>
+
+      <section class="grid">
+        <article class="option">
+          <div class="meta">
+            <div>
+              <h2>01. Apple 極簡風</h2>
+              <p>大量留白，乾淨，高級，產品感強</p>
+            </div>
+            <span class="badge">極簡 / 留白</span>
+          </div>
+          <div class="preview apple">
+            <div class="wire-nav">
+              <span>Logo</span>
+              <span>About / Work / Contact</span>
+            </div>
+            <div class="wire-hero">
+              <h3>Less words.<br />More confidence.</h3>
+              <p>大標題、少文字、單一主視覺，強調穩定與質感。</p>
+            </div>
+            <div class="wire-block"></div>
+          </div>
+          <div class="notes">
+            <strong>適合你如果：</strong>
+            <ul>
+              <li>想讓人覺得穩、成熟、乾淨</li>
+              <li>內容不想太多，重點要很集中</li>
+              <li>你希望網站像高級履歷，不像作品展示牆</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="option">
+          <div class="meta">
+            <div>
+              <h2>02. 科技控制台風</h2>
+              <p>電影控制台感，資訊密度高，科技感強</p>
+            </div>
+            <span class="badge">科技 / 控制台</span>
+          </div>
+          <div class="preview tech">
+            <div class="wire-nav">
+              <span>[PROFILE: ACTIVE]</span>
+              <span>[STATUS: READY]</span>
+            </div>
+            <div class="wire-screen">
+              <h3>PROJECT OPS</h3>
+              <p>偏螢幕介面、資料面板、線框、螢光色 accent。</p>
+              <div class="wire-lines">
+                <div class="line-box"></div>
+                <div class="pulse-box"></div>
+              </div>
+            </div>
+          </div>
+          <div class="notes">
+            <strong>適合你如果：</strong>
+            <ul>
+              <li>想強調數據、流程、系統感</li>
+              <li>要讓人一眼感覺你很「數位化」</li>
+              <li>你不介意風格更強烈、更不像傳統履歷</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="option">
+          <div class="meta">
+            <div>
+              <h2>03. 溫暖米色餐飲風</h2>
+              <p>米色、奶茶色、柔和，親切但不廉價</p>
+            </div>
+            <span class="badge">溫暖 / 米色</span>
+          </div>
+          <div class="preview warm">
+            <div class="wire-nav">
+              <span>Brand Story</span>
+              <span>Menu / About / Contact</span>
+            </div>
+            <div class="wire-hero">
+              <h3>Warm. Calm. Trustworthy.</h3>
+              <p>像品牌故事頁，讓人先感受到親和力。</p>
+              <div class="wire-cards">
+                <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div>
+              </div>
+            </div>
+          </div>
+          <div class="notes">
+            <strong>適合你如果：</strong>
+            <ul>
+              <li>想做得親切、有人味</li>
+              <li>面向餐飲、服務業、地方品牌更自然</li>
+              <li>你希望網站少一點壓迫感，多一點溫度</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="option">
+          <div class="meta">
+            <div>
+              <h2>04. 個人名片風</h2>
+              <p>三秒看完重點，適合面試與快速交換資訊</p>
+            </div>
+            <span class="badge">名片 / 快速</span>
+          </div>
+          <div class="preview cardstyle">
+            <div class="wire-card">
+              <h3>王中成</h3>
+              <p>Business Development / Project Management</p>
+              <div class="mini-bar"></div>
+              <div class="mini-bar"></div>
+              <div class="mini-bar"></div>
+            </div>
+          </div>
+          <div class="notes">
+            <strong>適合你如果：</strong>
+            <ul>
+              <li>主要目的是求職，不是品牌展示</li>
+              <li>你想讓主管快速抓到姓名、專長、聯絡方式</li>
+              <li>你要的是效率，不是情緒氛圍</li>
+            </ul>
+          </div>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
