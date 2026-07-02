@@ -529,6 +529,16 @@ h2 {
   gap: 10px;
 }
 
+.contact-subtitle {
+  margin-top: 18px;
+}
+
+.contact-phone {
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
 .contact-link {
   display: inline-flex;
   align-items: center;
