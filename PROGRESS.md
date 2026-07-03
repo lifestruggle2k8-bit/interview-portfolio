@@ -77,6 +77,16 @@
   - https://usefultoolscollection-1.vercel.app/
 - 讓面試官進站後第一屏就能看到你的實作網站之一
 
+### 9. 首頁文案與版面微調
+
+- Header 品牌列改為 `ALL ABOUT ME`
+- Hero 主標改為：
+  - `先拆解需求，再動手做。`
+- 一句話介紹改為兩行版本：
+  - `不只是把事情做完，而是做到令人放心。`
+- 將「核心資訊」與「現在找得到我」合併為「專業認證」
+- 「我怎麼做事」區塊改為 `SMART 原則` 五張卡片
+
 ## Git / 部署紀錄摘要
 
 - `c913c53` Public website without PDFs
