@@ -70,6 +70,13 @@
 - 經歷區補入 2025 短期國際業務經驗
 - About 區補入最新證照、永續管理訓練與 AI 工具實作
 
+### 8. 小工具網站曝光
+
+- 在首頁第一屏右側摘要區新增顯眼卡片
+- 連結至：
+  - https://usefultoolscollection-1.vercel.app/
+- 讓面試官進站後第一屏就能看到你的實作網站之一
+
 ## Git / 部署紀錄摘要
 
 - `c913c53` Public website without PDFs
