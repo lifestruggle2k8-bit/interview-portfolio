@@ -612,6 +612,10 @@ h2 {
   gap: 18px;
 }
 
+.about-side-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .contact-banner {
   position: relative;
   z-index: 1;
@@ -703,6 +707,7 @@ button:focus-visible {
   .capability-grid,
   .contact-grid,
   .about-section,
+  .about-side-grid,
   .editorial-card,
   .hero-card-grid {
     grid-template-columns: 1fr;
